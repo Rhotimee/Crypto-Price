@@ -1,0 +1,14 @@
+{
+  "name": "crypt-price",
+  "version": "1.0.0",
+  "description": "Get the price of any crypto-currency from your terminal",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Yemitan Isaiah Rotimi",
+  "license": "ISC",
+  "dependencies": {
+    "yargs": "^10.0.3"
+  }
+}
