@@ -6,8 +6,9 @@ const argv = yargs
     .help()
     .alias('help', 'h')
     .argv;
-
+x = argv._[0];
 let command = argv._[0].toUpperCase();
+
 let command2 = argv._[0].toLowerCase();
 
 request({
@@ -21,7 +22,10 @@ request({
                 console.log(`Name: ${body[i].name}`);
                 console.log(`Current Price: $${body[i].price_usd} USD`);
                 console.log(`Market Cap: $${body[i].market_cap_usd} USD`);
-            } 
+                break;
+            } else {
+                console.log(`${argv._[0]} could not be found`); break;
+            }
         } 
     } else {console.log(`The server could not be reached`)}   
 });
