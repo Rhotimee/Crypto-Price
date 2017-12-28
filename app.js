@@ -6,7 +6,7 @@ const argv = yargs
     .help()
     .alias('help', 'h')
     .argv;
-x = argv._[0];
+
 let command = argv._[0].toUpperCase();
 
 let command2 = argv._[0].toLowerCase();
