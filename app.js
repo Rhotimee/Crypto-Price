@@ -7,9 +7,18 @@ const argv = yargs
     .alias('help', 'h')
     .argv;
 
-let command = argv._[0].toUpperCase();
+let command, command2;
+let x = argv._[0];
 
-let command2 = argv._[0].toLowerCase();
+if (typeof x === 'string'){
+    command = x.toUpperCase(); command2 = x.toLowerCase() ;
+} else {
+    command = ''+x;
+}
+
+// let command = argv._[0].toUpperCase();
+
+// let command2 = argv._[0].toLowerCase();
 
 request({
     url: `https://api.coinmarketcap.com/v1/ticker/`,
