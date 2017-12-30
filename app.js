@@ -1,5 +1,5 @@
 const yargs = require('yargs');
-const request = require('request');
+const crypto = require('./crypto-price/crypto');
 
 const argv = yargs
     
@@ -7,34 +7,25 @@ const argv = yargs
     .alias('help', 'h')
     .argv;
 
-let command, command2;
-let x = argv._[0];
+let firstArg = argv._[0];
 
-if (typeof x === 'string'){
-    command = x.toUpperCase(); command2 = x.toLowerCase() ;
-} else {
-    command = ''+x;
-}
+let toVerify = (arg) => {
+    if (typeof arg === 'string'){
+        return arg.toUpperCase();
+    } else {
+        return ''+arg;
+    }
+};
 
-// let command = argv._[0].toUpperCase();
+let command = toVerify(firstArg);
 
-// let command2 = argv._[0].toLowerCase();
 
-request({
-    url: `https://api.coinmarketcap.com/v1/ticker/`,
-    json: true
-}, (error, response, body) => {
-
-    if (!error && response.statusCode === 200){
-        for (let i = 0; i < body.length; i++){
-            if (body[i].symbol === command || body[i].id === command2){
-                console.log(`Name: ${body[i].name}`);
-                console.log(`Current Price: $${body[i].price_usd} USD`);
-                console.log(`Market Cap: $${body[i].market_cap_usd} USD`);
-                break;
-            } else {
-                console.log(`${argv._[0]} could not be found`); break;
-            }
-        } 
-    } else {console.log(`The server could not be reached`)}   
-});
+crypto.getCrypto(command).then((msg) => {
+    cryptoPrice = msg.currentPrice;
+    console.log(msg.name);
+    console.log(`1 ${command} = $${msg.currentPrice} USD`);
+    console.log(`Market Cap: $${msg.marketCap}`)
+    
+}, (errorMessage) => {
+    console.log('Error: ', errorMessage)
+})
