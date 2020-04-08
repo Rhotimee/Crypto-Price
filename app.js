@@ -1,18 +1,7 @@
 const yargs = require('yargs');
 const crypto = require('./crypto-price/crypto');
 
-// const titleOption = {
-//     describe: 'Get Note',
-//     demand: false,
-//     alias: 'g'
-// }
-
 const argv = yargs
-    
-    // .command('get', 'Get the price of any crypto',{
-    //     title : titleOption
-    // 
-    // })
     .help()
     .alias('help', 'h')
     .argv;
@@ -26,11 +15,6 @@ let toVerify = (arg) => {
         return ''+arg;
     }
 };
-// if (firstArg === 'get'){
-//     console.log(argv)
-// }
-
-// else{
 
 let command = toVerify(firstArg);
 
@@ -43,5 +27,3 @@ crypto.getCrypto(command).then((msg) => {
 }, (errorMessage) => {
     console.log('Error: ', errorMessage)
 })
-
-// }
